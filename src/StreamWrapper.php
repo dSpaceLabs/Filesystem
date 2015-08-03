@@ -5,6 +5,11 @@ namespace Dspacelabs\Component\Filesystem;
 abstract class StreamWrapper implements StreamWrapperInterface
 {
     /**
+     * @var resource
+     */
+    public $context;
+
+    /**
      * {@inheritDoc}
      */
     public function dir_closedir()
