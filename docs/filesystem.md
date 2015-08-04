@@ -36,7 +36,7 @@ It might be possible to support streams or other service provided by php.
 - Uses `dspace` scheme
 
 ```php
-$filesystem = new Filesystem(new LocalAdapter('/var/assets'));
+$filesystem = Filesystem::getInstance(new LocalAdapter('/var/assets'));
 
 // gets the content of file `/var/assets/path/to/file.ext`
 $content = file_get_contents('dspace://path/to/file.ext');
@@ -44,7 +44,7 @@ $content = file_get_contents('dspace://path/to/file.ext');
 
 ```php
 // There would be more config for S3 adapter
-$filesystem = new Filesystem(new AmazonS3Adapter());
+$filesystem = Filesystem::getInstance(new AmazonS3Adapter());
 
 // Fetches content from S3
 $content = file_get_contents('dspace://bucket/file.ext');
