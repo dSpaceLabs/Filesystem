@@ -19,15 +19,18 @@ class StreamWrapper implements StreamWrapperInterface
      */
     protected $protocol = 'dspace';
 
-    protected $cache;
-    protected $logger;
-
+    /**
+     * {@inheritDoc}
+     */
     public function __construct()
     {
         $defaults      = stream_context_get_options(stream_context_get_default());
         $this->adapter = $defaults[$this->protocol]['adapter'];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function __destruct()
     {
     }
@@ -142,14 +145,17 @@ class StreamWrapper implements StreamWrapperInterface
      */
     public function stream_open($path, $mode, $options, &$openedPath)
     {
+        $parts = parse_url($path);
         var_dump(
             parse_url($path),
             $mode,
             $options,
             $openedPath
         );
+
+        $path = '/'.$parts['host'].$parts['path'];
+
         return true;
-        //trigger_error('Not Implemented', E_USER_WARNING);
     }
 
     /**
