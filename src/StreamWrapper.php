@@ -135,7 +135,7 @@ class StreamWrapper implements StreamWrapperInterface
     {
         $this->logger->debug(__METHOD__);
 
-        return $this->adapter->eof();
+        return $this->adapter->stream_eof();
     }
 
     /**
@@ -145,7 +145,7 @@ class StreamWrapper implements StreamWrapperInterface
     {
         $this->logger->debug(__METHOD__);
 
-        return $this->adapter->flush();
+        return $this->adapter->stream_flush();
     }
 
     /**
@@ -173,13 +173,15 @@ class StreamWrapper implements StreamWrapperInterface
      */
     public function stream_open($path, $mode, $options, &$openedPath)
     {
+        // Drop the protocol
+        $path = str_replace(Filesystem::PROTOCOL.':/', '', $path);
         $this->logger->debug(__METHOD__, array(
             'path'    => $path,
             'mode'    => $mode,
             'options' => $options
         ));
 
-        if (!$this->adapter->open($path, $mode)) {
+        if (!$this->adapter->stream_open($path, $mode, $options, $openedPath)) {
             throw new \Exception('Something dun fucked up');
         }
 
@@ -195,7 +197,7 @@ class StreamWrapper implements StreamWrapperInterface
             'count' => $count,
         ));
 
-        return $this->adapter->read($count);;
+        return $this->adapter->stream_read($count);
     }
 
     /**
@@ -204,8 +206,7 @@ class StreamWrapper implements StreamWrapperInterface
     public function stream_seek($offset, $whence = SEEK_SET)
     {
         $this->logger->debug(__METHOD__);
-
-        trigger_error('Not Implemented', E_USER_WARNING);
+        return $this->adapter->stream_seek($offset, $whence);
     }
 
     /**
@@ -253,9 +254,11 @@ class StreamWrapper implements StreamWrapperInterface
      */
     public function stream_write($data)
     {
-        $this->logger->debug(__METHOD__);
+        $this->logger->debug(__METHOD__, array(
+            'data' => $data,
+        ));
 
-        trigger_error('Not Implemented', E_USER_WARNING);
+        return $this->adapter->stream_write($data);
     }
 
     /**
@@ -278,6 +281,6 @@ class StreamWrapper implements StreamWrapperInterface
             'flags' => $flags,
         ));
 
-        return $this->adapter->stat($path, $flags);
+        return $this->adapter->url_stat($path, $flags);
     }
 }

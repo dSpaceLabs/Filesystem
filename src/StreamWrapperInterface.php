@@ -14,12 +14,12 @@ interface StreamWrapperInterface
      *
      * Is called right before `stream_open`
      */
-    public function __construct();
+    //public function __construct();
 
     /**
      * Destructs the StreamWrapper
      */
-    public function __destruct();
+    //public function __destruct();
 
     /**
      * Closes a directory handle
