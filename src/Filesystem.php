@@ -5,7 +5,7 @@ namespace Dspacelabs\Component\Filesystem;
 use Dspacelabs\Component\Filesystem\Adapter\AdapterInterface;
 use Psr\Log\LoggerInterface;
 
-class Filesystem
+class Filesystem implements FilesystemInterface
 {
     /**
      * just a thought
