@@ -32,7 +32,7 @@ adapter files. Use the source.
 ```php
 <?php
 
-$adapter    = new \Dspacelabs\Component\Filesystem\Adapter\LocalAdapter();
+$adapter    = new \Dspacelabs\Component\Filesystem\Adapter\LocalAdapter('/tmp');
 $filesystem = new \Dspacelabs\Component\Filesystem\Filesystem($adapter);
 
 // Everything uses the `dspace` protocol, you can swap out different adapters
@@ -40,6 +40,11 @@ $filesystem = new \Dspacelabs\Component\Filesystem\Filesystem($adapter);
 $handle = fopen('dspace://file.txt', 'w+');
 fwrite($handle, 'testing');
 fclose($handle);
+```
+
+```shell
+$ cat /tmp/file.txt
+testing
 ```
 
 For more usage example, check out the tests directory.
