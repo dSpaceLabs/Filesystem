@@ -21,6 +21,7 @@ It might be possible to support streams or other service provided by php.
 
 - `LocalAdapter` - stores on local disk
 - `AmazonS3Adapter` - stores files on Amazon S3
+- `MockAdapter` - Used for testing
 
 ## References
 

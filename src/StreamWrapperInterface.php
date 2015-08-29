@@ -106,12 +106,16 @@ interface StreamWrapperInterface
     public function stream_close();
 
     /**
+     * Tests for End-Of-File on a file pointer
+     *
      * @see feof()
      * @return boolean
      */
     public function stream_eof();
 
     /**
+     * Flushs the output
+     *
      * @see fflush()
      * @return boolean
      */
@@ -133,6 +137,8 @@ interface StreamWrapperInterface
     public function stream_metadata($path, $options, $value);
 
     /**
+     * Opens file or URL
+     *
      * @param string $path
      * @param string $mode
      * @param integer $options
@@ -142,7 +148,10 @@ interface StreamWrapperInterface
     public function stream_open($path, $mode, $options, &$openedPath);
 
     /**
+     * Read from stream
+     *
      * @param integer $count
+     *   How many bytes to read
      * @return string|false
      */
     public function stream_read($count);

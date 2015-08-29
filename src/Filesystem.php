@@ -3,6 +3,7 @@
 namespace Dspacelabs\Component\Filesystem;
 
 use Dspacelabs\Component\Filesystem\Adapter\AdapterInterface;
+use Psr\Log\LoggerInterface;
 
 class Filesystem
 {
@@ -15,9 +16,9 @@ class Filesystem
     const MODE_CREATE = 8;
 
     /**
-     * @var Filesystem
+     * @var string
      */
-    protected $instance;
+    const PROTOCOL = 'dspace';
 
     /**
      * @var AdapterInterface
@@ -25,16 +26,22 @@ class Filesystem
     protected $adapter;
 
     /**
-     * @var string
+     * @var Logger
      */
-    protected $protocol = 'dspace';
+    protected $logger;
 
     /**
      * @param AdapterInterface
      */
-    public function __construct(AdapterInterface $adapter)
+    public function __construct(AdapterInterface $adapter, LoggerInterface $logger = null)
     {
         $this->adapter = $adapter;
+        $this->logger  = $logger;
+
+        if (null === $this->logger) {
+            $this->logger = new \Psr\Log\NullLogger();
+        }
+
         $this->register();
     }
 
@@ -43,18 +50,17 @@ class Filesystem
      */
     protected function register()
     {
-        if (in_array($this->protocol, stream_get_wrappers())) {
-            stream_wrapper_unregister($this->protocol);
+        if (in_array(self::PROTOCOL, stream_get_wrappers())) {
+            stream_wrapper_unregister(self::PROTOCOL);
         }
 
-        stream_wrapper_register($this->protocol, '\Dspacelabs\Component\Filesystem\StreamWrapper', STREAM_IS_URL);
+        stream_wrapper_register(self::PROTOCOL, '\Dspacelabs\Component\Filesystem\StreamWrapper', STREAM_IS_URL);
 
         $default = stream_context_get_options(stream_context_get_default());
-        $default[$this->protocol]['adapter'] = $this->adapter;
-        // There could be a logger here as well
-        // $default[$this->protocol]['logger'] = $logger;
-        // @TODO implement cache interface from Cache component
-        // $default[$this->protocol]['cache'] = $cacheInterface;
+
+        $default[self::PROTOCOL]['adapter'] = $this->adapter;
+        $default[self::PROTOCOL]['logger']  = $this->logger;
+        //$default[self::PROTOCOL]['cache']  = $this->cache;
 
         stream_context_set_default($default);
     }
