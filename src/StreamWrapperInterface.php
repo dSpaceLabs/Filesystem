@@ -101,6 +101,8 @@ interface StreamWrapperInterface
     public function stream_cast($castAs);
 
     /**
+     * Close a resource
+     *
      * @see fclose()
      */
     public function stream_close();

@@ -92,4 +92,11 @@ class LocalAdapter implements AdapterInterface
     {
         return $this->file->fseek($offset, $whence);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function stream_close()
+    {
+    }
 }

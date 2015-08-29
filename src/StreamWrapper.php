@@ -126,6 +126,7 @@ class StreamWrapper implements StreamWrapperInterface
     public function stream_close()
     {
         $this->logger->debug(__METHOD__);
+        $this->adapter->stream_close();
     }
 
     /**
