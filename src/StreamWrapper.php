@@ -12,7 +12,7 @@ class StreamWrapper implements StreamWrapperInterface
     public $context;
 
     /**
-     * @var AdapterInterface
+     * @var \Dspacelabs\Component\Filesystem\Adapter\AdapterInterface
      */
     protected $adapter;
 
@@ -90,7 +90,11 @@ class StreamWrapper implements StreamWrapperInterface
      */
     public function mkdir($path, $mode, $options)
     {
-        $this->logger->debug(__METHOD__);
+        $this->logger->debug(__METHOD__, array(
+            'path'    => $path,
+            'mode'    => $mode,
+            'options' => $options
+        ));
         $this->logger->debug(__METHOD__.' Not Implemented');
 
         trigger_error('Not Implemented', E_USER_WARNING);
@@ -101,7 +105,10 @@ class StreamWrapper implements StreamWrapperInterface
      */
     public function rename($from, $to)
     {
-        $this->logger->debug(__METHOD__);
+        $this->logger->debug(__METHOD__, array(
+            'from' => $from,
+            'to'   => $to,
+        ));
         $this->logger->debug(__METHOD__.' Not Implemented');
 
         trigger_error('Not Implemented', E_USER_WARNING);
@@ -123,7 +130,9 @@ class StreamWrapper implements StreamWrapperInterface
      */
     public function stream_cast($castAs)
     {
-        $this->logger->debug(__METHOD__);
+        $this->logger->debug(__METHOD__, array(
+            'cast_as' => $castAs,
+        ));
         $this->logger->debug(__METHOD__.' Not Implemented');
 
         trigger_error('Not Implemented', E_USER_WARNING);
@@ -163,7 +172,9 @@ class StreamWrapper implements StreamWrapperInterface
      */
     public function stream_lock($operation)
     {
-        $this->logger->debug(__METHOD__);
+        $this->logger->debug(__METHOD__, array(
+            'operation' => $operation,
+        ));
         $this->logger->debug(__METHOD__.' Not Implemented');
 
         trigger_error('Not Implemented', E_USER_WARNING);
@@ -174,7 +185,11 @@ class StreamWrapper implements StreamWrapperInterface
      */
     public function stream_metadata($path, $options, $value)
     {
-        $this->logger->debug(__METHOD__);
+        $this->logger->debug(__METHOD__, array(
+            'path'    => $path,
+            'options' => $options,
+            'value'   => $value,
+        ));
         $this->logger->debug(__METHOD__.' Not Implemented');
 
         trigger_error('Not Implemented', E_USER_WARNING);
@@ -185,7 +200,7 @@ class StreamWrapper implements StreamWrapperInterface
      */
     public function stream_open($path, $mode, $options, &$openedPath)
     {
-        // Drop the protocol
+        // Drop the protocol/scheme part
         $path = str_replace(Filesystem::PROTOCOL.':/', '', $path);
         $this->logger->debug(__METHOD__, array(
             'path'    => $path,
@@ -194,7 +209,7 @@ class StreamWrapper implements StreamWrapperInterface
         ));
 
         if (!$this->adapter->stream_open($path, $mode, $options, $openedPath)) {
-            throw new \Exception('Something dun fucked up');
+            throw new \Exception('Could not open file');
         }
 
         return true;
@@ -217,7 +232,11 @@ class StreamWrapper implements StreamWrapperInterface
      */
     public function stream_seek($offset, $whence = SEEK_SET)
     {
-        $this->logger->debug(__METHOD__);
+        $this->logger->debug(__METHOD__, array(
+            'offset' => $offset,
+            'whence' => $whence,
+        ));
+
         return $this->adapter->stream_seek($offset, $whence);
     }
 
@@ -226,7 +245,11 @@ class StreamWrapper implements StreamWrapperInterface
      */
     public function stream_set_option($option, $arg1, $arg2)
     {
-        $this->logger->debug(__METHOD__);
+        $this->logger->debug(__METHOD__, array(
+            'option' => $option,
+            'arg1'   => $arg1,
+            'arg2'   => $arg2,
+        ));
         $this->logger->debug(__METHOD__.' Not Implemented');
 
         trigger_error('Not Implemented', E_USER_WARNING);
@@ -259,7 +282,9 @@ class StreamWrapper implements StreamWrapperInterface
      */
     public function stream_truncate($size)
     {
-        $this->logger->debug(__METHOD__);
+        $this->logger->debug(__METHOD__, array(
+            'size' => $size,
+        ));
         $this->logger->debug(__METHOD__.' Not Implemented');
 
         trigger_error('Not Implemented', E_USER_WARNING);
