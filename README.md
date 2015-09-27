@@ -19,6 +19,7 @@ checking to see if you are on localhost or on a Heroku instance.
 ## Installation
 
 Stable: [![Packagist](https://img.shields.io/packagist/v/dspacelabs/filesystem.svg)](https://packagist.org/packages/dspacelabs/filesystem)
+
 Development: [![Packagist Pre Release](https://img.shields.io/packagist/vpre/dspacelabs/filesystem.svg)](https://packagist.org/packages/dspacelabs/filesystem)
 
 ```shell
