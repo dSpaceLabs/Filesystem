@@ -58,6 +58,8 @@ See [CHANGELOG.md].
 
 ## License
 
+[![Packagist](https://img.shields.io/packagist/l/dSpaceLabs/Filesystem.svg)](https://github.com/dSpaceLabs/Filesystem/blob/master/LICENSE)
+
 See [LICENSE].
 
 [CHANGELOG.md]: CHANGELOG.md
