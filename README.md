@@ -52,6 +52,14 @@ testing
 
 For more usage example, check out the tests directory.
 
+## Testing
+
+Just run `phpunit` to run all the tests.
+
+```bash
+phpunit
+```
+
 ## Change Log
 
 See [CHANGELOG.md].

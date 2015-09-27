@@ -46,6 +46,10 @@ class LocalAdapter implements AdapterInterface
      */
     protected function setPrefix($prefix)
     {
+        if ('/' === substr($prefix, -1, 1)) {
+            $prefix = substr($prefix, 0, (strlen($prefix) - 1));
+        }
+
         $this->prefix = $prefix;
     }
 
@@ -54,7 +58,8 @@ class LocalAdapter implements AdapterInterface
      */
     public function stream_open($path, $mode, $options, &$openedPath)
     {
-        $fileInfo = new \SplFileInfo($this->prefix.$path);
+        $parts = explode('://', $path);
+        $fileInfo = new \SplFileInfo($this->prefix.'/'.$parts[1]);
 
         $this->file = $fileInfo->openFile($mode);
 
@@ -119,7 +124,8 @@ class LocalAdapter implements AdapterInterface
      */
     public function dir_opendir($path, $options)
     {
-        $path = $this->prefix.$path;
+        $path = $this->prefix.'/'.$path;
+
         if ($this->handler = opendir($path)) {
             return true;
         }

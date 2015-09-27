@@ -201,11 +201,11 @@ class StreamWrapper implements StreamWrapperInterface
     public function stream_open($path, $mode, $options, &$openedPath)
     {
         // Drop the protocol/scheme part
-        $path = str_replace(Filesystem::PROTOCOL.':/', '', $path);
         $this->logger->debug(__METHOD__, array(
-            'path'    => $path,
-            'mode'    => $mode,
-            'options' => $options
+            'path'        => $path,
+            'mode'        => $mode,
+            'options'     => $options,
+            'opendedPath' => $openedPath,
         ));
 
         if (!$this->adapter->stream_open($path, $mode, $options, $openedPath)) {

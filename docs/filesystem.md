@@ -13,8 +13,6 @@ It might be possible to support streams or other service provided by php.
 
 - `AdapterInterface` - All Adapters implement this
 - `FilesystemInterface` - Main API to use
-- `FileInterface` - Wraps a file
-- `DirectoryInterface` - Wraps a directory
 - `StreamWrapperInterface` - Extends the PHP stream wrapper prototype
 
 ## Adapters
@@ -33,3 +31,24 @@ It might be possible to support streams or other service provided by php.
 
 ## Examples
 
+```php
+<?php
+// Initialize the service with the adapter you want
+$filesystem = new Filesystem(new LocalAdapter('/tmp'));
+
+// Open `/tmp/file.txt`
+$handle = fopen('dspace://file.txt', 'w+');
+
+// Write `testing` in file
+fwrite($handle, 'testing');
+
+// Put pointer back to the start of the file
+fseek($handle, 0);
+
+// Read contents of file
+do {
+    $content = fread($handle, 1024);
+} while (!feof($handle));
+
+fclose($handle);
+```
