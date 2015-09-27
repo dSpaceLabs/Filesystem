@@ -1,4 +1,4 @@
-dspacelabs/filesystem
+dspacelabs/filesystem [![Travis](https://img.shields.io/travis/dSpaceLabs/Filesystem.svg)](https://travis-ci.org/dSpaceLabs/Filesystem)
 =====================
 
 Filesystem is generic PHP wrapper around the filesystem that allows you to setup
@@ -17,6 +17,9 @@ checking to see if you are on localhost or on a Heroku instance.
 - Support for logging using `psr/log` package
 
 ## Installation
+
+Stable: [![Packagist](https://img.shields.io/packagist/v/dspacelabs/filesystem.svg)](https://packagist.org/packages/dspacelabs/filesystem)
+Development: [![Packagist Pre Release](https://img.shields.io/packagist/vpre/dspacelabs/filesystem.svg)](https://packagist.org/packages/dspacelabs/filesystem)
 
 ```shell
 composer require "dspacelabs/filesystem:0.1@dev"
