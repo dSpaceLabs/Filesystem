@@ -5,23 +5,18 @@ namespace Dspacelabs\Component\Filesystem;
 use Dspacelabs\Component\Filesystem\Adapter\AdapterInterface;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Filesystem
+ */
 class Filesystem implements FilesystemInterface
 {
-    /**
-     * just a thought
-     */
-    const MODE_READ   = 1;
-    const MODE_WRITE  = 2;
-    const MODE_APPEND = 4;
-    const MODE_CREATE = 8;
-
     /**
      * @var string
      */
     const PROTOCOL = 'dspace';
 
     /**
-     * @var AdapterInterface
+     * @var \Dspacelabs\Component\Filesystem\Adapter\AdapterInterface
      */
     protected $adapter;
 
@@ -31,6 +26,8 @@ class Filesystem implements FilesystemInterface
     protected $logger;
 
     /**
+     * Creates a new instance of Filesystem
+     *
      * @param AdapterInterface
      */
     public function __construct(AdapterInterface $adapter, LoggerInterface $logger = null)
@@ -60,6 +57,10 @@ class Filesystem implements FilesystemInterface
 
         $default[self::PROTOCOL]['adapter'] = $this->adapter;
         $default[self::PROTOCOL]['logger']  = $this->logger;
+
+        /**
+         * It might be worth putting a caching layer in
+         */
         //$default[self::PROTOCOL]['cache']  = $this->cache;
 
         stream_context_set_default($default);

@@ -28,9 +28,23 @@ class LocalAdapter implements AdapterInterface
     private $file;
 
     /**
+     * @var resource
+     */
+    private $handler;
+
+    /**
      * @param string $prefix
      */
     public function __construct($prefix = '/')
+    {
+        $this->setPrefix($prefix);
+    }
+
+    /**
+     * Used to normalize the prifix so it always has same
+     * format
+     */
+    protected function setPrefix($prefix)
     {
         $this->prefix = $prefix;
     }
@@ -98,5 +112,34 @@ class LocalAdapter implements AdapterInterface
      */
     public function stream_close()
     {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function dir_opendir($path, $options)
+    {
+        $path = $this->prefix.$path;
+        if ($this->handler = opendir($path)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function dir_readdir()
+    {
+        return readdir($this->handler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function dir_closedir()
+    {
+        return closedir($this->handler);
     }
 }

@@ -11,10 +11,4 @@ use Dspacelabs\Component\Filesystem\StreamWrapperInterface;
  */
 interface AdapterInterface //extends StreamWrapperInterface
 {
-    public function stream_open($path, $mode, $options, &$openedPath);
-    public function stream_read($bytes);
-    public function stream_write($data);
-    public function stream_eof();
-    public function stream_seek($offset, $whence = SEEK_SET);
-    public function stream_flush();
 }

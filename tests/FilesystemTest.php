@@ -41,5 +41,11 @@ class FilesystemTest extends \PHPUnit_Framework_TestCase
             $content = fread($handle, 1024);
         } while (!feof($handle));
         fclose($handle);
+
+        $dhandle = opendir('dspace://');
+        while (($file = readdir($dhandle)) !== false) {
+            $this->logger->debug($file);
+        }
+        closedir($dhandle);
     }
 }
