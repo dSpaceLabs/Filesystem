@@ -80,9 +80,8 @@ class StreamWrapper implements StreamWrapperInterface
     public function dir_rewinddir()
     {
         $this->logger->debug(__METHOD__);
-        $this->logger->debug(__METHOD__.' Not Implemented');
 
-        trigger_error('Not Implemented', E_USER_WARNING);
+        return $this->adapter->dir_rewinddir();
     }
 
     /**
@@ -108,9 +107,8 @@ class StreamWrapper implements StreamWrapperInterface
             'from' => $from,
             'to'   => $to,
         ));
-        $this->logger->debug(__METHOD__.' Not Implemented');
 
-        trigger_error('Not Implemented', E_USER_WARNING);
+        return $this->adapter->rename($from, $to);
     }
 
     /**
@@ -119,9 +117,8 @@ class StreamWrapper implements StreamWrapperInterface
     public function rmdir($path, $options)
     {
         $this->logger->debug(__METHOD__);
-        $this->logger->debug(__METHOD__.' Not Implemented');
 
-        trigger_error('Not Implemented', E_USER_WARNING);
+        return $this->adapter->rmdir($path, $options);
     }
 
     /**
@@ -142,7 +139,8 @@ class StreamWrapper implements StreamWrapperInterface
     public function stream_close()
     {
         $this->logger->debug(__METHOD__);
-        $this->adapter->stream_close();
+
+        return $this->adapter->stream_close();
     }
 
     /**
@@ -173,9 +171,8 @@ class StreamWrapper implements StreamWrapperInterface
         $this->logger->debug(__METHOD__, array(
             'operation' => $operation,
         ));
-        $this->logger->debug(__METHOD__.' Not Implemented');
 
-        trigger_error('Not Implemented', E_USER_WARNING);
+        return $this->adapter->stream_lock($operation);
     }
 
     /**
@@ -188,9 +185,8 @@ class StreamWrapper implements StreamWrapperInterface
             'options' => $options,
             'value'   => $value,
         ));
-        $this->logger->debug(__METHOD__.' Not Implemented');
 
-        trigger_error('Not Implemented', E_USER_WARNING);
+        return $this->adapter->stream_metadata($path, $options, $value);
     }
 
     /**
@@ -248,9 +244,8 @@ class StreamWrapper implements StreamWrapperInterface
             'arg1'   => $arg1,
             'arg2'   => $arg2,
         ));
-        $this->logger->debug(__METHOD__.' Not Implemented');
 
-        trigger_error('Not Implemented', E_USER_WARNING);
+        return $this->adapter->stream_set_option($option, $arg1, $arg2);
     }
 
     /**
@@ -281,9 +276,8 @@ class StreamWrapper implements StreamWrapperInterface
         $this->logger->debug(__METHOD__, array(
             'size' => $size,
         ));
-        $this->logger->debug(__METHOD__.' Not Implemented');
 
-        trigger_error('Not Implemented', E_USER_WARNING);
+        return $this->adapter->stream_truncate($size);
     }
 
     /**
@@ -304,9 +298,8 @@ class StreamWrapper implements StreamWrapperInterface
     public function unlink($path)
     {
         $this->logger->debug(__METHOD__);
-        $this->logger->debug(__METHOD__.' Not Implemented');
 
-        trigger_error('Not Implemented', E_USER_WARNING);
+        return $this->adapter->unlink($path);
     }
 
     /**
