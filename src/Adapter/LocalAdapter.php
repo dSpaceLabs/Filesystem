@@ -66,6 +66,14 @@ class LocalAdapter implements AdapterInterface
     /**
      * {@inheritDoc}
      */
+    public function stream_cast($castAs)
+    {
+        return $this->handle;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function stream_read($bytes)
     {
         return fread($this->handle, $bytes);

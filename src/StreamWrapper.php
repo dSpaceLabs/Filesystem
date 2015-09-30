@@ -132,9 +132,8 @@ class StreamWrapper implements StreamWrapperInterface
         $this->logger->debug(__METHOD__, array(
             'cast_as' => $castAs,
         ));
-        $this->logger->debug(__METHOD__.' Not Implemented');
 
-        trigger_error('Not Implemented', E_USER_WARNING);
+        return $this->adapter->stream_cast($castAs);
     }
 
     /**
