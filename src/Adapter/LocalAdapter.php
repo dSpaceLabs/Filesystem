@@ -148,4 +148,20 @@ class LocalAdapter implements AdapterInterface
     {
         return closedir($this->handler);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function url_stat($path, $flags)
+    {
+        $parts = explode('://', $path);
+        $path  = $this->prefix.'/'.$parts[1];
+
+        if ($flags & STREAM_URL_STAT_QUIET || !file_exists($path)) {
+            return @stat($path);
+        }
+        else {
+            return stat($path);
+        }
+    }
 }

@@ -202,6 +202,8 @@ interface StreamWrapperInterface
     public function unlink($path);
 
     /**
+     * Retrieve information about a file
+     *
      * @param string $path
      * @param integer $flags
      * @return array
