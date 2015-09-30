@@ -99,6 +99,14 @@ class LocalAdapter implements AdapterInterface
     /**
      * {@inheritDoc}
      */
+    public function stream_stat()
+    {
+        return $this->file->fstat();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function stream_flush()
     {
         return $this->file->fflush();

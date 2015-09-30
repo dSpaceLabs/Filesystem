@@ -260,9 +260,8 @@ class StreamWrapper implements StreamWrapperInterface
     public function stream_stat()
     {
         $this->logger->debug(__METHOD__);
-        $this->logger->debug(__METHOD__.' Not Implemented');
 
-        trigger_error('Not Implemented', E_USER_WARNING);
+        return $this->adapter->stream_stat();
     }
 
     /**
