@@ -54,12 +54,8 @@ class LocalAdapter implements AdapterInterface
     public function stream_open($path, $mode, $options, &$openedPath)
     {
         $parts = explode('://', $path);
-        $fileInfo = new \SplFileInfo($this->prefix.'/'.$parts[1]);
+        $this->handle = fopen($this->prefix.'/'.$parts[1], $mode);
 
-        $this->handle = fopen($this->prefix.'/'.$parts[1]);
-
-        // Check and make sure the file was opened and if it was not
-        // than we need to return false
         if (null === $this->handle) {
             return false;
         }
