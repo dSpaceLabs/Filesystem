@@ -164,4 +164,15 @@ class LocalAdapter implements AdapterInterface
             return stat($path);
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function mkdir($path, $mode, $options)
+    {
+        $parts = explode('://', $path);
+        $path  = $this->prefix.'/'.$parts[1];
+
+        return mkdir($path, $mode, true);
+    }
 }
