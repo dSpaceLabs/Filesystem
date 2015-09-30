@@ -23,11 +23,6 @@ class LocalAdapter implements AdapterInterface
     protected $prefix;
 
     /**
-     * @var \SplFileObject
-     */
-    private $file;
-
-    /**
      * @var resource
      */
     private $handler;
@@ -61,11 +56,11 @@ class LocalAdapter implements AdapterInterface
         $parts = explode('://', $path);
         $fileInfo = new \SplFileInfo($this->prefix.'/'.$parts[1]);
 
-        $this->file = $fileInfo->openFile($mode);
+        $this->handle = fopen($this->prefix.'/'.$parts[1]);
 
         // Check and make sure the file was opened and if it was not
         // than we need to return false
-        if (null === $this->file) {
+        if (null === $this->handle) {
             return false;
         }
 
@@ -77,7 +72,7 @@ class LocalAdapter implements AdapterInterface
      */
     public function stream_read($bytes)
     {
-        return $this->file->fread($bytes);
+        return fread($this->handle, $bytes);
     }
 
     /**
@@ -85,7 +80,7 @@ class LocalAdapter implements AdapterInterface
      */
     public function stream_write($data)
     {
-        return $this->file->fwrite($data);
+        return fwrite($this->handle, $data);
     }
 
     /**
@@ -93,7 +88,7 @@ class LocalAdapter implements AdapterInterface
      */
     public function stream_eof()
     {
-        return $this->file->eof();
+        return feof($this->handle);
     }
 
     /**
@@ -101,7 +96,7 @@ class LocalAdapter implements AdapterInterface
      */
     public function stream_stat()
     {
-        return $this->file->fstat();
+        return fstat($this->handle);
     }
 
     /**
@@ -109,7 +104,7 @@ class LocalAdapter implements AdapterInterface
      */
     public function stream_flush()
     {
-        return $this->file->fflush();
+        return fflush($this->handle);
     }
 
     /**
@@ -117,7 +112,7 @@ class LocalAdapter implements AdapterInterface
      */
     public function stream_seek($offset, $whence = SEEK_SET)
     {
-        return $this->file->fseek($offset, $whence);
+        return fseek($this->handle, $offset, $whence);
     }
 
     /**
@@ -125,6 +120,7 @@ class LocalAdapter implements AdapterInterface
      */
     public function stream_close()
     {
+        return fclose($this->handle);
     }
 
     /**
