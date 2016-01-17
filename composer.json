@@ -17,7 +17,6 @@
         "irc": "irc://irc.freenode.org/dspacelabs"
     },
     "require": {
-        "php": ">=5.5.0",
         "psr/log": "^1.0",
         "dspacelabs/cache": "^0.1@dev"
     },
